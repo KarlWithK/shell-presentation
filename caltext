@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function caltext() {
+	toilet -t -f smblock $1 | boxes -d $2 -a hc -p h8 | dotacat
+}
