@@ -1,16 +1,20 @@
 ---
-title: Shells Scripting
-author: Karl.Senior
-date: 2021-03-22
+author: Karl.SeniorMars
+title: Shell Scripting
+date: 2021-04-27
 extensions:
   - terminal
+  - image_ueberzug
 ---
 
 # Shell Scripting
  - Brief Overview
- - Lack of practice
- - Made this at 2 AM
+ - Going to introduce new tools
+ - Aimed for beginners/intermediate users
+ - `Man` is your best friend
  - https://youtu.be/tc4ROCJYbm0
+
+![20](pics/unix.png)
 
 ---
 
@@ -20,6 +24,8 @@ extensions:
   - Text Printing
   - System monitoring and backup
   - Task Automation
+  
+![10](pics/external-content.duckduckgo.com.png)
 
 ---
 
@@ -27,51 +33,58 @@ extensions:
   - Perl 5
   - Python
   - Dart
-  - sh and its derivatives
+  - sh and its derivatives (our focus)
 
-| Shell | Expanded                    | Family                    |
-|-------|-----------------------------|---------------------------|
-| sh    | Bourne Shell                | ~                         |
-| csh   | C Shell                     | ~                         |
-| tcsh  | *TENEX Copmeletion Shell    | csh                       |
-| bash  | Bourne Again Shell          | sh                        |
-| zsh   | Z Shell                     | sh                        |
-| fish  | Friendly Interactive Shell  | ~                         |
-| dash  | Debian Almquist shell       | sh                        |
-| xonsh | Python-powered shell        | sh                        |
-| rush  | Bourne Shell                | Made by me and friends :) |
+| Shell      | Expanded                   | Family                    |
+|------------|----------------------------|---------------------------|
+| sh         | Bourne Shell               | ~                         |
+| csh        | C Shell                    | ~                         |
+| tcsh       | *TENEX Copmeletion Shell   | csh                       |
+| bash       | Bourne Again Shell         | sh                        |
+| zsh        | Z Shell                    | sh                        |
+| fish       | Friendly Interactive Shell | ~                         |
+| dash       | Debian Almquist shell      | sh                        |
+| xonsh      | Python-powered shell       | ~                         |
+| powershell | .Net(?) Shell              | Windows                   |
+| nushell    | "A new type of shell"      | ~                         |
+| rush       | Ru-sh                      | Made by me and friends :) |
 
 * Not totally accurate
 * Btw it's not hard to write your own shell
 
 ---
 
-# Vocab
-  - Any questions ask about these terms ask now
+# Some Vocab to Know
 
-| Word                          | Definition                                                                |
-|-------------------------------|---------------------------------------------------------------------------|
-| Shell                         | An environment to connect with your OS                                    |
-| Terminal Emulator             | An emulator that mimics an environment for old monitor and keyboard setup |
-| TTY                           | Teletypewriter *                                                          |
-| Command Line (CLI)            | A line on which commands are typed to be runned                           |
-| Command Prompt                | The prompt at the start of the command line / Export $PS1                 |
-| Terminal User Interface (TUI) | A program that runs in the terminal                                       |
+| Word                          | Definition                                                                   |
+|-------------------------------|------------------------------------------------------------------------------|
+| Shell                         | An environment/interface that connect a user with the OS                     |
+| Terminal Emulator             | An emulator that mimics an environment with monitor and keyboard setup (tty) |
+| TTY                           | Teletypewriter *                                                             |
+| Command Line (CLI)            | A line on which commands are typed to be runned                              |
+| Command Prompt                | The prompt at the start of the command line / `echo $PS1`                    |
+| Terminal User Interface (TUI) | A program that runs in the terminal                                          |
 
-* http://www.linusakesson.net/programming/tty/index.php
-* I use the Alacritty terminal emulator (written in rust) with zsh
+http://www.linusakesson.net/programming/tty/index.php
 
 ---
 
-# Piping and Redirection revisited
-  - Piping: Take the output of one program and make it the input to another's
-  - Redirection: Change the input/output/error to somewhere else
+# Piping and Redirection Revisited
+  - Piping: Take the output of one program and make it the input of another's
 
-| File                  | File Descriptor |
-|-----------------------|-----------------|
-| Standard Input STDIN  | 0               |
-| Standard Input STDOUT | 1               |
-| Standard Input STDERR | 2               |
+```terminal8
+bash -il
+```
+
+# Redirection
+  - Redirection: Change the input/output/error to somewhere else
+  - https://www.gnu.org/software/bash/manual/html_node/Redirections.html
+
+| File                    | File Descriptor | location    |
+|-------------------------|-----------------|-------------|
+| Standard Input \ STDIN  | 0               | /dev/stdin  |
+| Standard Out \  STDOUT  | 1               | /dev/stdout |
+| Standard Error \ STDERR | 2               | /dev/stderr |
 
 ---
 
@@ -85,12 +98,13 @@ extensions:
 | > file             | Redirect stout to a file (overwites)                              |
 | >> file            | Append stout to a file                                            |
 | < file             | Take input from a file                                            |
-| 2> file            | Redirect stdout to file                                           |
+| 2> file            | Redirect stderr to a file                                         |
 | 2> /dev/null       | Anything here will be discarded (only write to this special file) |
 | 1> output 2> error | Redirect stdout to output and stdout to error                     |
 | 2>&1               | Redirect stderr to stdout                                         |
-| \&                 | Redirect both stderr and stdout                                   |
+| \|&                | Redirect both stderr and stdout                                   |
 
+- Also look at `tee`!
 
 ---
 
@@ -120,16 +134,24 @@ do
   x=$(( $x + 1 ))
 done
 ```
-
-- `man bash`
+ 
+- https://www.gnu.org/software/bash/manual/html_node/Shell-Arithmetic.html
+- https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html
 
 ---
 
 # Live-demo time
+- simple wallpaper script
 
 ---
 
-# Cron jobs and nohup
-  - Schedule jobs
-  - Automate task
-  - immune to hangups
+# Further stuff that you should look at:
+  - `cronjobs`
+    - Schedule jobs
+    - Automate task
+    - Very helpful
+  - `nohup`
+    - "run a command immune to hangups, with output to a non-tty"
+  - `tee`
+    - A command that will help you be more confident in your piping
+![18](pics/tee.png)

@@ -1,0 +1,7 @@
+caltext
+files.txt
+pics
+README.md
+script
+shell.md
+wallpapers.sh
